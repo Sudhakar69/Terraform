@@ -1,0 +1,40 @@
+name: Terraform
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.5.0
+
+    - name: Initialize and apply VPC
+      working-directory: ./vpc
+      run: |
+        terraform init
+        terraform plan -out=tfplan
+        terraform apply -auto-approve tfplan
+
+    - name: Initialize and apply EKS
+      working-directory: ./eks
+      run: |
+        terraform init
+        terraform plan -out=tfplan
+        terraform apply -auto-approve tfplan
+
+    - name: Initialize and apply EC2
+      working-directory: ./ec2
+      run: |
+        terraform init
+        terraform plan -out=tfplan
+        terraform apply -auto-approve tfplan

@@ -1,0 +1,44 @@
+# Define a Deployment resource for running nginx
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  # Define the label selector for the pods
+  selector:
+    matchLabels:
+      app: nginx
+  # Number of pod replicas
+  replicas: 2
+  # Pod template
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        # Nginx image to be used
+        image: nginx:1.19.0
+        # Port that the container exposes
+        ports:
+        - containerPort: 80
+
+
+---
+# Define a Service resource to expose the nginx Deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  # Select pods with the app: nginx label
+  selector:
+    app: nginx
+  # Define the port mapping for the service
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  # Use a LoadBalancer to expose the service to the internet
+  type: LoadBalancer

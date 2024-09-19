@@ -18,23 +18,32 @@ jobs:
       with:
         terraform_version: 1.5.0
 
-    - name: Initialize and apply VPC
+    - name: Initialize and plan VPC
       working-directory: ./vpc
       run: |
         terraform init
-        terraform plan -out=tfplan
-        terraform apply -auto-approve tfplan
+        terraform plan -input=false -out=tfplan
 
-    - name: Initialize and apply EKS
+    - name: Apply VPC
+      working-directory: ./vpc
+      run: terraform apply -input=false -auto-approve tfplan
+
+    - name: Initialize and plan EKS
       working-directory: ./eks
       run: |
         terraform init
-        terraform plan -out=tfplan
-        terraform apply -auto-approve tfplan
+        terraform plan -input=false -out=tfplan
 
-    - name: Initialize and apply EC2
+    - name: Apply EKS
+      working-directory: ./eks
+      run: terraform apply -input=false -auto-approve tfplan
+
+    - name: Initialize and plan EC2
       working-directory: ./ec2
       run: |
         terraform init
-        terraform plan -out=tfplan
-        terraform apply -auto-approve tfplan
+        terraform plan -input=false -out=tfplan
+
+    - name: Apply EC2
+      working-directory: ./ec2
+      run: terraform apply -input=false -auto-approve tfplan

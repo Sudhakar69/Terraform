@@ -28,28 +28,34 @@ jobs:
       working-directory: ./vpc
       run: |
         terragrunt init
-        terragrunt plan -input=false -out=tfplan
+        terragrunt plan -input=false 
+    #-out=tfplan
 
     - name: Apply VPC
       working-directory: ./vpc
-      run: terragrunt apply -input=false -auto-approve tfplan
+      run: terragrunt apply -input=false 
+      #-auto-approve tfplan
 
     - name: Initialize and plan EKS
       working-directory: ./eks
       run: |
         terragrunt init
-        terragrunt plan -input=false -out=tfplan
+        terragrunt plan -input=false 
+    #-out=tfplan
 
     - name: Apply EKS
       working-directory: ./eks
-      run: terragrunt apply -input=false -auto-approve tfplan
+      run: terragrunt apply -input=false 
+    #-auto-approve tfplan
 
     - name: Initialize and plan EC2
       working-directory: ./ec2
       run: |
         terragrunt init
-        terragrunt plan -input=false -out=tfplan
+        terragrunt plan -input=false 
+    #-out=tfplan
 
     - name: Apply EC2
       working-directory: ./ec2
-      run: terragrunt apply -input=false -auto-approve tfplan
+      run: terragrunt apply -input=false 
+    #-auto-approve tfplan

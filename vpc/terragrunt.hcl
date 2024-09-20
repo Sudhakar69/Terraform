@@ -2,5 +2,5 @@
 //   path = "terragrunt.hcl"
 // }
 inputs = {
-  vpc_name = "example-vpc"
+  vpc_name = "tarakvpc"
 }

@@ -25,14 +25,14 @@ jobs:
         sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
 
     - name: Initialize and plan VPC
-      working-directory: Terragrunt/vpc
+      working-directory: ../Terragrunt/vpc
       run: |
         terragrunt init
         terragrunt plan -input=false 
     #-out=tfplan
 
     - name: Apply VPC
-      working-directory: Terragrunt/vpc
+      working-directory: ../Terragrunt/vpc
       run: terragrunt apply -input=false 
       #-auto-approve tfplan
 

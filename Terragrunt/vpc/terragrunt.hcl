@@ -1,7 +1,6 @@
 include {
-  path = find_in_parent_folders()
+  path = "../terragrunt.hcl"
 }
-
 inputs = {
   vpc_name = "example-vpc"
 }

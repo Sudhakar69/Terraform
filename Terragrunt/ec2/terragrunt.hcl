@@ -1,7 +1,6 @@
 include {
-  path = find_in_parent_folders()
+  path = "../terragrunt.hcl"
 }
-
 dependency "vpc" {
   config_path = "../vpc"
 }

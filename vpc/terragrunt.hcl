@@ -1,5 +1,5 @@
 include {
-  path = "../terragrunt.hcl"
+  path = "terragrunt.hcl"
 }
 inputs = {
   vpc_name = "example-vpc"

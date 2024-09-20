@@ -1,6 +1,6 @@
-include {
-  path = "terragrunt.hcl"
-}
+// include {
+//   path = "terragrunt.hcl"
+// }
 dependency "vpc" {
   config_path = "../vpc"
 }
